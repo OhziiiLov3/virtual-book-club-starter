@@ -37,6 +37,32 @@ const loadReviews = () => {
 
 const handleReviewSubmit = (event) => {
   event.preventDefault();
+   // Extract values from the form fields
+   const bookTitle = document.getElementById("book-title").value;
+   const reviewText = document.getElementById("review-text").value;
+   const rating = document.getElementById("rating").value;
+
+   
+   // Create a new review object with a unique ID
+   const newReview = {
+    id: Date.now(), // Unique ID based on current timestamp
+    title: bookTitle,
+    reviewText: reviewText,
+    rating: rating
+  };
+
+ // Create an HTML element for the new review
+  const newReviewElement = createReviewElement(newReview);
+
+  // Insert the new review element at the beginning of the reviews list
+  const reviewsList = document.getElementById("reviews-list");
+  const firstReview = reviewsList.firstChild;
+  reviewsList.insertBefore(newReviewElement, firstReview);
+
+  // Reset the form fields to clear the input after submission
+  document.getElementById("book-title").value = "";
+  document.getElementById("review-text").value = "";
+  document.getElementById("rating").value = "1"; // Reset to default rating
   console.log("handleReveiwSubmit");
 };
 
